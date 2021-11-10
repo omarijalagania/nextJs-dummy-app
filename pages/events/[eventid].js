@@ -1,13 +1,21 @@
 import React from "react";
 import {
   getEventById,
-  getAllEvents,
+  featuredEvents,
 } from "../../components/helpers/api-helper";
 import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
 
 function DetailEvents(props) {
+  if (!props.event) {
+    return (
+      <div className="center">
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   return (
     <>
       <EventSummary title={props.event.title} />
@@ -31,14 +39,17 @@ export async function getStaticProps(context) {
     props: {
       event,
     },
+    revalidate: 30,
   };
 }
 
 export const getStaticPaths = async () => {
-  const allEvents = await getAllEvents();
+  const allEvents = await featuredEvents();
+
+  //get dynamic id from url
   const paths = allEvents.map((event) => ({ params: { eventid: event.id } }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: "blocking" };
 };
 
 export default DetailEvents;
