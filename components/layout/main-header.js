@@ -13,6 +13,9 @@ function MainHeader() {
           <li>
             <Link href="/events ">All Events</Link>
           </li>
+          <li>
+            <Link href="/form ">Form</Link>
+          </li>
         </ul>
       </nav>
     </header>

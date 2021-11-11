@@ -28,10 +28,12 @@
   text-decoration: none;
   color: #74dacc;
   font-size: 1rem;
+  margin: 0 10px;
 }
 
 .navigation {
   list-style: none;
+  display: flex;
 }
 
 @media (min-width: 768px) {
