@@ -6,7 +6,7 @@ import {
 import EventSummary from "../../components/event-detail/event-summary";
 import EventLogistics from "../../components/event-detail/event-logistics";
 import EventContent from "../../components/event-detail/event-content";
-
+import Comments from "../../components/input/comments";
 function DetailEvents(props) {
   if (!props.event) {
     return (
@@ -27,6 +27,7 @@ function DetailEvents(props) {
       />
       <EventContent>
         <p>{props.event.description}</p>
+        <Comments eventid={props.event.id} />
       </EventContent>
     </>
   );

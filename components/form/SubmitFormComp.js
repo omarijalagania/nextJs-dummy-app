@@ -34,7 +34,7 @@ function SubmitFormComp() {
 
         <label htmlFor="surname"> Surname</label>
         <input name="surname" id="surname" type="text" ref={surName} />
-        <button type="submit">Submit</button>
+        <button>Submit</button>
       </form>
     </div>
   );

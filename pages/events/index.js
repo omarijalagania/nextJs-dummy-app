@@ -2,6 +2,7 @@ import React from "react";
 import { getAllEvents } from "../../components/helpers/api-helper";
 import EventList from "../../components/events/event-list";
 import EventsSearch from "../../components/events/events-search";
+import NewsletterRegistration from "../../components/input/newsletter-registration";
 import { useRouter } from "next/router";
 function Events(props) {
   const router = useRouter();
@@ -14,6 +15,7 @@ function Events(props) {
   return (
     <>
       <EventsSearch onSearch={findEventHandler} />
+      <NewsletterRegistration />
       <EventList items={props.events} />
     </>
   );
