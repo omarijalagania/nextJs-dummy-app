@@ -34,7 +34,7 @@ const handler = async (req, res) => {
     //Get all the comments from MongoDb
     const documents = await db
       .collection("comments")
-      .find()
+      .find({ eventId }) //fetch comments with eventId
       .sort({ _id: -1 })
       .toArray();
 
