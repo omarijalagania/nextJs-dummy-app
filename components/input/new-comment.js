@@ -37,6 +37,7 @@ function NewComment(props) {
 
   return (
     <form onClick={sendCommentHandler} className={classes.form}>
+      <props.Toaster />
       <div className={classes.row}>
         <div className={classes.control}>
           <label htmlFor="email">Your email</label>

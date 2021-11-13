@@ -27,15 +27,15 @@ function DetailEvents(props) {
       />
       <EventContent>
         <p>{props.event.description}</p>
-        <Comments eventid={props.event.id} />
+        <Comments eventId={props.event.id} />
       </EventContent>
     </>
   );
 }
 
 export async function getStaticProps(context) {
-  const eventid = context.params.eventid;
-  const event = await getEventById(eventid);
+  const eventId = context.params.eventId;
+  const event = await getEventById(eventId);
   return {
     props: {
       event,
@@ -48,7 +48,7 @@ export const getStaticPaths = async () => {
   const allEvents = await featuredEvents();
 
   //get dynamic id from url
-  const paths = allEvents.map((event) => ({ params: { eventid: event.id } }));
+  const paths = allEvents.map((event) => ({ params: { eventId: event.id } }));
 
   return { paths, fallback: "blocking" };
 };
