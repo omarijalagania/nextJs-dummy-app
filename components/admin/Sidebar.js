@@ -19,6 +19,14 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 
+import { AuthContext } from "./Auth";
+import firebaseConfig from "../../firebase";
+
+import AddPost from "./AddPost";
+import { useRouter } from "next/router";
+
+import { Button } from "@mui/material";
+
 const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
@@ -70,6 +78,8 @@ function Sidebar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const router = useRouter();
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -93,9 +103,16 @@ function Sidebar() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
-              Persistent drawer
-            </Typography>
+            <div style={{ display: "flex", justifyContent: "right" }}>
+              <p>Dashboard</p>
+
+              <Button
+                variant="filled"
+                onClick={() => firebaseConfig.auth().signOut()}
+              >
+                Log Out
+              </Button>
+            </div>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -132,16 +149,6 @@ function Sidebar() {
             ))}
           </List>
           <Divider />
-          {/* <List>
-            {["All mail", "Trash", "Spam"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List> */}
         </Drawer>
       </Box>
     </div>

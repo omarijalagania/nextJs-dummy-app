@@ -1,21 +1,19 @@
 import React, { useState } from "react";
 
-import { getDatabase, ref, set, push, child } from "firebase/database";
-
-import appZ from "../../firebase";
+import { getDatabase, ref, set } from "firebase/database";
 
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-import { Box } from "@mui/system";
+import { Typography } from "@mui/material";
 
 function AddPost() {
-  const [id, setId] = useState("7");
-  const [date, setDate] = useState("2021");
-  const [description, setDescription] = useState("test");
-  const [image, setImage] = useState("image");
+  const [id, setId] = useState("e7");
+  const [date, setDate] = useState("2021-05-12");
+  const [description, setDescription] = useState("This is Test Description");
+  const [image, setImage] = useState("images/coding-event.jpg");
   const [isFeatured, setIsFeatured] = useState(false);
-  const [location, setLocation] = useState("address");
-  const [title, setTitle] = useState("test");
+  const [location, setLocation] = useState("My Street 12, 10115 Broke City");
+  const [title, setTitle] = useState("Just Another Event");
 
   const postData = {
     id,
@@ -34,88 +32,107 @@ function AddPost() {
   };
 
   return (
-    <Box
-      sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch", marginTop: "30px" },
-        width: "80%",
-        border: "1px solid black",
-        margin: "30px auto",
-        padding: "10px",
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <div style={{ display: "flex" }}>
+    <>
+      <form
+        style={{
+          marginTop: "30px",
+          minWidth: "50%",
+          width: "400px",
+          border: "1px solid black",
+          margin: "30px 20px",
+          padding: "15px",
+          borderRadius: "7px",
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <Typography
+          sx={{ padding: "7px", fontWeight: "900", fontSize: "24px" }}
+        >
+          New Post
+        </Typography>
         <TextField
           id="outlined-basic"
           required
-          label="Add Id e.g (e3)"
+          label="Title"
           variant="filled"
-          value={id}
-          onChange={(e) => setId(e.target.value)}
+          value={title}
+          fullWidth
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <div style={{ display: "flex", margin: "30px 1px" }}>
+          <TextField
+            style={{ marginRight: "15px" }}
+            id="outlined-basic"
+            required
+            fullWidth
+            label="Date: 2021-05-12"
+            variant="filled"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+
+          <TextField
+            id="outlined-basic"
+            required
+            label="Add Id e.g (e3)"
+            variant="filled"
+            value={id}
+            onChange={(e) => setId(e.target.value)}
+          />
+        </div>
+
+        <TextField
+          style={{ marginBottom: "15px" }}
+          id="outlined-basic"
+          fullWidth
+          required
+          multiline={true}
+          rows={5}
+          label="Description"
+          variant="filled"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
         <TextField
+          style={{ marginBottom: "15px" }}
           id="outlined-basic"
+          fullWidth
           required
-          label="Date: 2021-05-12"
+          label="Address"
           variant="filled"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
         />
-      </div>
+        <div style={{ display: "flex", marginBottom: "20px" }}>
+          <TextField
+            style={{ marginRight: "15px" }}
+            id="outlined-basic"
+            required
+            fullWidth
+            label="Image: images/coding-event.jpg"
+            variant="filled"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
 
-      <TextField
-        sx={{ width: "100%" }}
-        id="outlined-basic"
-        required
-        label="Description"
-        variant="filled"
-        multiline
-        maxRows={4}
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
+          <TextField
+            id="outlined-basic"
+            required
+            label="isFeatured : true -false"
+            variant="filled"
+            value={isFeatured}
+            onChange={(e) => setIsFeatured(e.target.value)}
+          />
+        </div>
 
-      <TextField
-        id="outlined-basic"
-        required
-        label="Image: images/coding-event.jpg"
-        variant="filled"
-        value={image}
-        onChange={(e) => setImage(e.target.value)}
-      />
-
-      <TextField
-        id="outlined-basic"
-        required
-        label="isFeatured : true -false"
-        variant="filled"
-        value={isFeatured}
-        onChange={(e) => setIsFeatured(e.target.value)}
-      />
-
-      <TextField
-        id="outlined-basic"
-        required
-        label="Address"
-        variant="filled"
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
-      />
-
-      <TextField
-        id="outlined-basic"
-        required
-        label="Title"
-        variant="filled"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-
-      <Button onClick={submitPost} variant="contained">
-        Send Post
-      </Button>
-    </Box>
+        <div>
+          <Button onClick={submitPost} variant="contained">
+            Send Post
+          </Button>
+        </div>
+      </form>
+    </>
   );
 }
 

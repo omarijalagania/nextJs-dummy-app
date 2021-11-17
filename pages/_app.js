@@ -1,10 +1,13 @@
 import "../styles/globals.css";
 import Layout from "../components/layout/layout";
+import { AuthProvider } from "../components/admin/Auth";
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <AuthProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </AuthProvider>
   );
 }
 
