@@ -103,7 +103,13 @@ function Sidebar() {
             >
               <MenuIcon />
             </IconButton>
-            <div style={{ display: "flex", justifyContent: "right" }}>
+            <div
+              style={{
+                display: "flex",
+                width: "90%",
+                justifyContent: "space-between",
+              }}
+            >
               <p>Dashboard</p>
 
               <Button

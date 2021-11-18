@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useSnackbar } from "notistack";
 import { getDatabase, ref, set } from "firebase/database";
 
 import { TextField } from "@mui/material";
@@ -15,6 +15,8 @@ function AddPost() {
   const [location, setLocation] = useState("My Street 12, 10115 Broke City");
   const [title, setTitle] = useState("Just Another Event");
 
+  const { enqueueSnackbar } = useSnackbar();
+
   const postData = {
     id,
     date,
@@ -27,8 +29,13 @@ function AddPost() {
 
   const submitPost = (e) => {
     e.preventDefault();
-    const database = getDatabase();
-    set(ref(database, "events/" + id), postData);
+    try {
+      const database = getDatabase();
+      set(ref(database, "events/" + id), postData);
+      enqueueSnackbar("Post Added", { variant: "success" });
+    } catch (error) {
+      enqueueSnackbar("Error Adding Post", { variant: "error" });
+    }
   };
 
   return (
